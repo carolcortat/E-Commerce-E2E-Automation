@@ -2,20 +2,20 @@
 
 Overview
 
-This project is an automated testing suite for an e-commerce website using Cypress. Cypress is a fast, reliable, and easy-to-use end-to-end testing tool for web applications. The test scripts cover various user flows such as browsing products, adding items to the cart, making a purchase, and validating account-related actions.
+This project is an automated testing suite for an e-commerce website using Cypress. The suite targets the public Magento Luma demo at [magento2-demo.magebit.com](https://magento2-demo.magebit.com/) (replacement for the retired `magento.softwaretestingboard.com`). The test scripts cover user flows such as browsing products, adding items to the cart, making a purchase, and validating account-related actions.
 
 ## Installation
 
 Clone the repository:
 
 ```bash
-  git clone https://github.com/tahmid888/E-Commerce-E2E-Automation.git
+  git clone https://github.com/moisesAlc/E-Commerce-E2E-Automation.git
 ```
 
 Navigate to the project directory:
 
 ```bash
-  cd ecommerce-website-cypress
+  cd E-Commerce-E2E-Automation
 ```
 
 Install dependencies
@@ -84,4 +84,5 @@ Contributions are always welcome!
 
 ## Authors
 
-- [@Tahamidul Haque](https://www.github.com/tahmid888)
+- [@moisesAlc](https://github.com/moisesAlc)
+- Original: [@Tahamidul Haque](https://github.com/tahmid888)

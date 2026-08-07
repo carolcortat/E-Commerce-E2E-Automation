@@ -1,17 +1,11 @@
 {
-  "login": {
-    "email": "simec123r@gmail.com",
-    "password": "captain@123"
-  },
-
   "name": {
     "firstName": "Hq",
     "lastName": "Am"
   },
-  "email": "simec123r@gmail.com",
   "password": {
-    "password": "captain@123",
-    "confirmPassword": "captain@123"
+    "password": "Captain@123",
+    "confirmPassword": "Captain@123"
   },
   "successFullCreateAccountMessage": "Thank you for registering with Main Website Store."
 }

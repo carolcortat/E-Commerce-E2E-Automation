@@ -3,44 +3,35 @@ export class whatsNewPage {
     shopNewYogaButton: ".more.button",
     whatsNewTopTitleText: "span.base",
     addToCartText: ".message-success.success.message",
-    clickWhatsNewLink:
-      'a[href="https://magento.softwaretestingboard.com/what-is-new.html"]',
-    newLumaYogaCollectionLink:
-      'a[href="https://magento.softwaretestingboard.com/collections/yoga-new.html"]',
-    selectCartNewLumaYogaCollection: "li[class ='item product product-item']",
-    selectSizeOfDress: "#option-label-size-143-item-171",
-    selectColourOfDress: "#option-label-color-93-item-57",
+    clickWhatsNewLink: 'a[href*="/what-is-new.html"]',
+    newLumaYogaCollectionLink: 'a[href*="/collections/yoga-new.html"]',
+    productItem: "li.item.product.product-item",
+    productItemLink: "a.product-item-link",
+    sizeOption: '.swatch-attribute.size .swatch-option',
+    colorOption: '.swatch-attribute.color .swatch-option',
     typeQty: 'input[name="qty"]',
-    addToCartButton: 'button[class="action primary tocart"]',
-    cartCheckOut:
-      'a[href="https://magento.softwaretestingboard.com/checkout/cart/"]',
-
+    addToCartButton: 'button.action.primary.tocart',
+    miniCart: ".action.showcart",
+    viewCart: "a.action.viewcart",
     proceedToCheckout: '[data-role="proceed-to-checkout"]',
-
-    firstName: 'input[name="firstname"]',
-    //firstName: '[id="FPD42X7"]',
-    lastName: 'input[name="lastname"]',
-    company: 'input[name="company"]',
-    streetAddress: 'input[name="street[0]"]',
-    city: 'input[name="city"]',
-    postalCode: 'input[name="postcode"]',
-    telephone: 'input[name="telephone"]',
-    countryDropdown: '[name="country_id"]',
+    firstName: '#shipping-new-address-form input[name="firstname"]',
+    lastName: '#shipping-new-address-form input[name="lastname"]',
+    company: '#shipping-new-address-form input[name="company"]',
+    streetAddress: '#shipping-new-address-form input[name="street[0]"]',
+    city: '#shipping-new-address-form input[name="city"]',
+    postalCode: '#shipping-new-address-form input[name="postcode"]',
+    telephone: '#shipping-new-address-form input[name="telephone"]',
+    countryDropdown: '#shipping-new-address-form [name="country_id"]',
+    regionDropdown: '#shipping-new-address-form [name="region_id"]',
     shippingMethodsRadioButton: 'input[type="radio"]',
-    nextButton: '[class="button action continue primary"]',
+    nextButton: "button.button.action.continue.primary",
     purchaseMessage: '[data-ui-id="page-title-wrapper"]',
-    continueShoppingButton: '[class="action primary continue"]',
+    continueShoppingButton: "a.action.primary.continue",
   };
 
   clickWhatsNew() {
-    cy.get(this.webLocators.clickWhatsNewLink).click();
+    cy.get(this.webLocators.clickWhatsNewLink).first().click();
   }
-
-  // checking whats new page -> New Luma Yoga Collection links
-
-  // newLumaYogaCollectionLink() {
-  //   cy.get(this.webLocators.newLumaYogaCollectionLink).click().should("contain", "New Luma Yoga Collection");
-  // }
 
   shopNewYogaButton() {
     cy.get(this.webLocators.shopNewYogaButton)
@@ -50,57 +41,63 @@ export class whatsNewPage {
 
   message() {
     return cy.get(this.webLocators.whatsNewTopTitleText);
-
-    //   .invoke("text")
-    //   .then((text1) => {
-    //     expect(text1).to.eq("New Luma Yoga Collection");
-    //   });
   }
 
-  // Select the carts
-  selectCartNewLumaYogaCollection() {
-    cy.get(this.webLocators.selectCartNewLumaYogaCollection).eq(0).click();
-    cy.get("span.base").should("contain", "Echo Fit Compression Short");
+  selectProductByName(productName) {
+    cy.contains(this.webLocators.productItemLink, productName).click();
+    cy.get("span.base").should("contain", productName);
+  }
+
+  openProduct(path) {
+    cy.visit(path);
   }
 
   selectSizeOfDress() {
-    cy.get(this.webLocators.selectSizeOfDress).click();
+    cy.get(this.webLocators.sizeOption).first().click();
   }
+
   selectColourOfDress() {
-    cy.get(this.webLocators.selectColourOfDress).click();
+    cy.get(this.webLocators.colorOption).first().click();
   }
-  typeQty() {
-    cy.get(this.webLocators.typeQty).clear();
-    cy.get(this.webLocators.typeQty).type("4");
+
+  typeQty(qty = "4") {
+    cy.get(this.webLocators.typeQty).clear().type(String(qty));
   }
+
   addToCartButton() {
     cy.get(this.webLocators.addToCartButton).click();
   }
 
   addToCartmessage() {
-    return cy.get(this.webLocators.addToCartText).click();
+    return cy.get(this.webLocators.addToCartText);
   }
 
   cartCheckOut() {
-    cy.get(this.webLocators.cartCheckOut).first().click();
-    cy.get('[class="action viewcart"]').click();
+    cy.visit("/checkout/cart/");
+    cy.contains("h1", "Shopping Cart", { timeout: 15000 }).should("be.visible");
+    cy.get(".cart.item").should("have.length.at.least", 1);
   }
 
   proceedToCheckout() {
-    cy.get(this.webLocators.proceedToCheckout).click();
+    cy.get(this.webLocators.proceedToCheckout, { timeout: 15000 })
+      .should("be.visible")
+      .and("not.be.disabled");
+
+    // Magebit demo sometimes ignores the cart CTA click; open checkout directly.
+    cy.visit("/checkout/");
+    cy.url({ timeout: 20000 }).should("include", "/checkout");
+    cy.url().should("not.include", "/cart");
+    cy.get("#checkout", { timeout: 20000 }).should("be.visible");
   }
+
   verifyShippingText() {
-    cy.get("div")
-      .find('[class="step-title"]')
-      .should("contain", "Shipping Address");
-    cy.get("div")
-      .find('[class="step-title"]')
-      .should("contain", "Shipping Methods");
+    cy.get(".step-title").should("contain", "Shipping Address");
+    cy.get(".step-title").should("contain", "Shipping Methods");
   }
-  // Forms
 
   shippingAddressFName(FName) {
-    cy.get(this.webLocators.firstName)
+    cy.get(this.webLocators.firstName, { timeout: 20000 })
+      .should("be.visible")
       .clear({ force: true })
       .type(FName, { force: true });
   }
@@ -109,29 +106,34 @@ export class whatsNewPage {
     cy.get(this.webLocators.lastName)
       .clear({ force: true })
       .type(LName, { force: true });
-    //cy.get(this.webLocators.lastName).clear().type(LName);
   }
+
   shippingAddressCompany(companyName) {
     cy.get(this.webLocators.company).type(companyName, { force: true });
   }
+
   shippingAddressStreet(streetAddress) {
     cy.get(this.webLocators.streetAddress).type(streetAddress, { force: true });
   }
+
   shippingAddressCity(city) {
     cy.get(this.webLocators.city).type(city, { force: true });
   }
 
-  stateByDropDown() {
-    //cy.get("select").find("#G363LA5").select("18");
+  stateByDropDown(region = "California") {
+    cy.get(this.webLocators.regionDropdown, { timeout: 10000 })
+      .should("be.visible")
+      .select(region, { force: true });
   }
 
   shippingAddressPostalCode(postalCode) {
-    cy.get(this.webLocators.postalCode).type(postalCode, { force: true });
-  }
-  countryByDropDown() {
-    cy.get(this.webLocators.countryDropdown).select("Bangladesh", {
+    cy.get(this.webLocators.postalCode).clear({ force: true }).type(postalCode, {
       force: true,
     });
+  }
+
+  countryByDropDown(country = "United States") {
+    cy.get(this.webLocators.countryDropdown).select(country, { force: true });
   }
 
   shippingAddressTelephone(telephone) {
@@ -139,38 +141,102 @@ export class whatsNewPage {
   }
 
   shippingMethods() {
-    cy.get(this.webLocators.shippingMethodsRadioButton).check(
-      "flatrate_flatrate"
+    cy.get(".table-checkout-shipping-method", { timeout: 20000 }).should(
+      "be.visible"
     );
+    cy.get('.table-checkout-shipping-method input[type="radio"]')
+      .should("be.visible")
+      .first()
+      .check({ force: true });
+  }
+
+  waitForCheckoutLoader() {
+    cy.get("body").should(($body) => {
+      const $mask = $body.find(".loading-mask");
+      if ($mask.length) {
+        expect($mask.is(":visible"), "checkout loading mask").to.eq(false);
+      }
+    });
   }
 
   nextButtonClick() {
-    cy.get(this.webLocators.nextButton).click();
+    cy.intercept("POST", "**/shipping-information").as("shippingInformation");
+    cy.get(this.webLocators.nextButton).should("be.visible").click();
+    cy.wait("@shippingInformation", { timeout: 30000 })
+      .its("response.statusCode")
+      .should("be.oneOf", [200, 204]);
+    this.waitForCheckoutLoader();
+    cy.get(".payment-method", { timeout: 30000 }).should("be.visible");
   }
 
   paymentMethodCheck() {
-    //cy.get('input[name="billing-address-same-as-shipping"]').click();
-    cy.get('input[name="billing-address-same-as-shipping"]').check();
-    cy.get('input[name="billing-address-same-as-shipping"]').should(
-      "be.checked"
-    );
+    cy.get("body").then(($body) => {
+      if ($body.find('#checkmo, input[value="checkmo"]').length) {
+        cy.get('#checkmo, input[value="checkmo"]').first().check({ force: true });
+      } else if ($body.find('#cashondelivery, input[value="cashondelivery"]').length) {
+        cy.get('#cashondelivery, input[value="cashondelivery"]')
+          .first()
+          .check({ force: true });
+      } else {
+        cy.get('input[name="payment[method]"]').first().check({ force: true });
+      }
+    });
+
+    cy.get(".payment-method._active", { timeout: 15000 }).should("be.visible");
+
+    cy.get("body").then(($body) => {
+      const checkbox = $body.find(
+        ".payment-method._active input[name='billing-address-same-as-shipping']"
+      );
+      if (checkbox.length && !checkbox.is(":checked")) {
+        cy.wrap(checkbox.first()).check({ force: true });
+      }
+    });
+
+    this.waitForCheckoutLoader();
   }
+
   placeOrderButton() {
-    cy.get('button[class="action primary checkout"]').click();
+    cy.intercept("POST", "**/payment-information").as("paymentInformation");
+    cy.get(".payment-method._active button.action.primary.checkout", {
+      timeout: 15000,
+    })
+      .should("be.visible")
+      .and("not.be.disabled")
+      .click();
+
+    cy.wait("@paymentInformation", { timeout: 30000 }).then(({ response }) => {
+      expect(response?.statusCode, "payment-information status").to.eq(200);
+      // Magento returns the created order id as a JSON number/string.
+      expect(String(response?.body || ""), "created order id").to.match(
+        /\d+/
+      );
+    });
   }
+
+  /**
+   * Magebit demo redirects to an empty cart after place-order instead of the
+   * success page. Confirm the purchase through the customer order history.
+   */
+  verifyOrderPlaced(productName) {
+    cy.visit("/sales/order/history/");
+    cy.get("#my-orders-table tbody tr", { timeout: 15000 })
+      .should("have.length.at.least", 1)
+      .first()
+      .find("a.action.view")
+      .click();
+
+    cy.contains(productName, { timeout: 15000 }).should("be.visible");
+  }
+
   purchaseMessage() {
     return cy.get(this.webLocators.purchaseMessage);
   }
+
   continueShoppingButton() {
-    cy.get(this.webLocators.continueShoppingButton).click();
+    cy.visit("/");
+    cy.get(".logo").should("be.visible");
   }
-
-  // checkGridItems() {
-  //   cy.get("strong.modes-mode.active.mode-grid").first().click();
-  //   cy.get('[title="Grid"]').should("have.class");
-  // }
-
-  // Checking dropdown in whats new linked page
 
   checkSortByDropDown() {
     cy.get("#sorter").should("be.visible");

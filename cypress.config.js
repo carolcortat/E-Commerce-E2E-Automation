@@ -2,14 +2,16 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: "https://magento.softwaretestingboard.com/customer/account/login/",
-
+    baseUrl: "https://magento2-demo.magebit.com",
+    defaultCommandTimeout: 15000,
+    pageLoadTimeout: 60000,
+    video: false,
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
   },
 
   env: {
-    URL: "https://magento.softwaretestingboard.com/customer/account/create/",
+    URL: "https://magento2-demo.magebit.com/customer/account/create/",
   },
 });

@@ -1,6 +1,4 @@
 export class RegisterPage {
-  // Only Web Locators will be stored
-
   webLocators = {
     firstName: "#firstname",
     lastName: "#lastname",
@@ -11,29 +9,38 @@ export class RegisterPage {
     successMessage: "div.message-success.success.message",
   };
 
-  // Methods
-
   openURL() {
     cy.visit(Cypress.env("URL"));
   }
 
   enterFirstName(FName) {
-    cy.get(this.webLocators.firstName).type(FName);
+    cy.get(this.webLocators.firstName).clear().type(FName);
   }
+
   enterLastName(LName) {
-    cy.get(this.webLocators.lastName).type(LName);
+    cy.get(this.webLocators.lastName).clear().type(LName);
   }
+
   enterEmail(Email) {
-    cy.get(this.webLocators.email).type(Email);
+    cy.get(this.webLocators.email).clear().type(Email);
   }
+
   enterPassword(password) {
-    cy.get(this.webLocators.password).type(password);
-    cy.get(this.webLocators.confirmPassword).type(password);
+    cy.get(this.webLocators.password).clear().type(password);
   }
+
+  enterConfirmPassword(password) {
+    cy.get(this.webLocators.confirmPassword).clear().type(password);
+  }
+
   enterCreateAnAccountButton() {
     cy.get(this.webLocators.createAnAccountButton).click();
   }
-  successFullCreateAccountMessage() {
-    return cy.get(this.webLocators.successMessage).should("be.visible");
+
+  successFullCreateAccountMessage(message) {
+    return cy
+      .get(this.webLocators.successMessage)
+      .should("be.visible")
+      .and("contain.text", message);
   }
 }

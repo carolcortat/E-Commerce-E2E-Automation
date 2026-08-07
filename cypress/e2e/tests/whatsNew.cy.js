@@ -1,24 +1,32 @@
 import { whatsNewPage } from "../../pages/whatsNewPage";
 import whatsNewData from "../../fixtures/whatsNewData.json";
 import registerAccountData from "../../fixtures/registerAccountData.json";
+
 const whatsNewPageObj = new whatsNewPage();
 
 describe("Whats New Test Suite-2", () => {
   before(() => {
-    cy.login(
-      registerAccountData.login.email,
-      registerAccountData.login.password
-    );
+    const email = `e2e.shop.${Date.now()}@example.com`;
+
+    cy.registerAccount({
+      firstName: registerAccountData.name.firstName,
+      lastName: registerAccountData.name.lastName,
+      email,
+      password: registerAccountData.password.password,
+    });
   });
 
   it("#TC-2 Whats new ", () => {
     whatsNewPageObj.clickWhatsNew();
-    //whatsNewPageObj.newLumaYogaCollectionLink();
     whatsNewPageObj.shopNewYogaButton();
     whatsNewPageObj
       .message()
       .should("contain.text", whatsNewData.message.titleMessage);
-    whatsNewPageObj.selectCartNewLumaYogaCollection();
+
+    // Echo Fit remains on the demo store, but is no longer the first Yoga collection item.
+    whatsNewPageObj.openProduct(whatsNewData.product.path);
+    cy.get("span.base").should("contain", whatsNewData.product.name);
+
     whatsNewPageObj.selectSizeOfDress();
     whatsNewPageObj.selectColourOfDress();
     whatsNewPageObj.typeQty();
@@ -28,7 +36,6 @@ describe("Whats New Test Suite-2", () => {
       .should("contain.text", whatsNewData.message.addToCartMessage);
     whatsNewPageObj.cartCheckOut();
     whatsNewPageObj.proceedToCheckout();
-    //whatsNewPageObj.verifyShippingText();
     whatsNewPageObj.shippingAddressFName(
       whatsNewData.shippingInfo.name.firstName
     );
@@ -40,11 +47,11 @@ describe("Whats New Test Suite-2", () => {
       whatsNewData.shippingInfo.streetAddress
     );
     whatsNewPageObj.shippingAddressCity(whatsNewData.shippingInfo.city);
-    whatsNewPageObj.stateByDropDown();
+    whatsNewPageObj.countryByDropDown(whatsNewData.shippingInfo.country);
+    whatsNewPageObj.stateByDropDown(whatsNewData.shippingInfo.region);
     whatsNewPageObj.shippingAddressPostalCode(
       whatsNewData.shippingInfo.postalCode
     );
-    whatsNewPageObj.countryByDropDown();
     whatsNewPageObj.shippingAddressTelephone(
       whatsNewData.shippingInfo.telephone
     );
@@ -52,10 +59,7 @@ describe("Whats New Test Suite-2", () => {
     whatsNewPageObj.nextButtonClick();
     whatsNewPageObj.paymentMethodCheck();
     whatsNewPageObj.placeOrderButton();
-    whatsNewPageObj
-      .purchaseMessage()
-      .should("contain.text", whatsNewData.message.purchaseMessage);
+    whatsNewPageObj.verifyOrderPlaced(whatsNewData.product.name);
     whatsNewPageObj.continueShoppingButton();
-    //whatsNewPageObj.checkSortByDropDown();
   });
 });

@@ -1,88 +1,95 @@
 # E-Commerce Website - Cypress Automation Test
 
-Overview
+## Visão geral
 
-This project is an automated testing suite for an e-commerce website using Cypress. The suite targets the public Magento Luma demo at [magento2-demo.magebit.com](https://magento2-demo.magebit.com/) (replacement for the retired `magento.softwaretestingboard.com`). The test scripts cover user flows such as browsing products, adding items to the cart, making a purchase, and validating account-related actions.
+Este projeto é uma suíte de testes automatizados para um site de e-commerce usando Cypress. A suíte aponta para o demo público Magento Luma em [magento2-demo.magebit.com](https://magento2-demo.magebit.com/) (substituto do `magento.softwaretestingboard.com`, que foi descontinuado). Os scripts cobrem fluxos como navegação de produtos, adição ao carrinho, compra e ações relacionadas à conta.
 
-## Installation
+## Instalação
 
-Clone the repository:
+Clone o repositório:
 
 ```bash
   git clone https://github.com/moisesAlc/E-Commerce-E2E-Automation.git
 ```
 
-Navigate to the project directory:
+Entre no diretório do projeto:
 
 ```bash
   cd E-Commerce-E2E-Automation
 ```
 
-Install dependencies
+Instale as dependências:
 
 ```bash
   npm install
 ```
 
-Install Cypress:
+Instale o Cypress (se ainda não estiver nas dependências):
 
 ```bash
   npm install cypress --save-dev
-
 ```
 
-## Test Scenarios
+## Cenários de teste
 
-- Product Browsing: Tests for searching and filtering products.
-- Cart: Adding/removing items, updating quantities.
-- Checkout Process: Validating the checkout flow, payment gateway integration.
-- User Account: Registration, login, and profile management tests.
+- Navegação de produtos: busca e filtros.
+- Carrinho: adicionar/remover itens e atualizar quantidades.
+- Checkout: validação do fluxo de compra e integração de pagamento.
+- Conta do usuário: cadastro, login e gerenciamento de perfil.
 
-## Running Tests
+## Executando os testes
 
-To run the Cypress tests, use the following commands:
+Para rodar os testes Cypress, use os comandos abaixo.
 
-Open the Cypress Test Runner:
+Abrir o Cypress Test Runner:
 
 ```bash
   npx cypress open
 ```
 
-This will open the Cypress dashboard, where you can run individual tests or the whole suite.
+Isso abre o painel do Cypress, onde você pode executar testes individuais ou a suíte completa.
 
-Run tests in headless mode:
+Rodar os testes em modo headless:
 
 ```bash
   npx cypress run
 ```
 
-This runs all the tests in headless mode (without the browser UI) and generates a report.
+Isso executa todos os testes sem a interface do navegador.
 
-## Test Coverage
+Scripts npm disponíveis:
 
-The tests cover the following areas:
+```bash
+  npm test
+  npm run test:signUp
+  npm run test:whatsNew
+```
 
-- Product Pages: Ensuring that the product list and individual product details load properly, including filters, search functionality, and pagination.
-- Cart Management: Adding products to the cart, updating quantities, and removing items.
-- User Authentication: User registration, login, logout, and profile updates.
-- Checkout Flow: Address input, shipping options, payment validation, and order completion.
-- Order History: Validating order history after a successful purchase.
+## Cobertura de testes
 
-## Reporting
+Os testes cobrem as seguintes áreas:
 
-After running the tests, reports are automatically generated and can be found under the cypress/reports directory. You can view detailed information about passed/failed tests.
+- Páginas de produto: listagem e detalhes, incluindo filtros, busca e paginação.
+- Gestão do carrinho: adicionar produtos, atualizar quantidades e remover itens.
+- Autenticação: cadastro, login, logout e atualizações de perfil.
+- Fluxo de checkout: endereço, opções de envio, pagamento e conclusão do pedido.
+- Histórico de pedidos: validação do pedido após a compra.
 
-## Contributing
+## Relatórios
 
-Contributions are always welcome!
+Após a execução, artefatos do Cypress (quando gerados) ficam em diretórios como `cypress/screenshots` e `cypress/videos`.
 
-1. Fork this repository.
-2. Create a new branch (git checkout -b feature/your-feature).
-3. Commit your changes (git commit -m 'Add your feature').
-4. Push to the branch (git push origin feature/your-feature).
-5. Open a pull request.
+## Contribuindo
 
-## Authors
+Contribuições são bem-vindas!
+
+1. Faça um fork deste repositório.
+2. Crie uma nova branch (`git checkout -b feature/sua-feature`).
+3. Faça o commit das alterações (`git commit -m 'Add your feature'`).
+4. Envie a branch (`git push origin feature/sua-feature`).
+5. Abra um pull request.
+
+## Autores
 
 - [@moisesAlc](https://github.com/moisesAlc)
 - Original: [@Tahamidul Haque](https://github.com/tahmid888)

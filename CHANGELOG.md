@@ -1,31 +1,31 @@
 # Changelog
 
-All notable changes to this project are documented in this file.
+Todas as mudanças relevantes deste projeto são documentadas neste arquivo.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
 ## [1.1.0] - 2026-08-07
 
-### Changed
-- Migrated the Cypress suite from the retired `magento.softwaretestingboard.com` target to the public Magento Luma demo at [magento2-demo.magebit.com](https://magento2-demo.magebit.com/).
-- Updated repository URLs to [moisesAlc/E-Commerce-E2E-Automation](https://github.com/moisesAlc/E-Commerce-E2E-Automation).
-- Replaced hardcoded absolute Magento URLs with relative selectors and `baseUrl`-based navigation.
-- Stabilized checkout by opening `/checkout/` directly when the cart CTA is unreliable on the Magebit demo.
-- Switched post-purchase validation to customer order history, because the Magebit demo often redirects to an empty cart instead of `/checkout/onepage/success`.
-- Updated shipping fixtures to a US address with an explicit region for more reliable Magento checkout.
+### Alterado
+- Migrou a suíte Cypress do alvo descontinuado `magento.softwaretestingboard.com` para o demo público Magento Luma em [magento2-demo.magebit.com](https://magento2-demo.magebit.com/).
+- Atualizou as URLs do repositório para [moisesAlc/E-Commerce-E2E-Automation](https://github.com/moisesAlc/E-Commerce-E2E-Automation).
+- Substituiu URLs absolutas do Magento por seletores relativos e navegação baseada em `baseUrl`.
+- Estabilizou o checkout abrindo `/checkout/` diretamente quando o CTA do carrinho é instável no demo Magebit.
+- Passou a validar a compra pelo histórico de pedidos do cliente, porque o demo Magebit costuma redirecionar para um carrinho vazio em vez de `/checkout/onepage/success`.
+- Atualizou as fixtures de envio para um endereço dos EUA com região explícita, para um checkout Magento mais confiável.
 
-### Added
-- Unique email generation for signup and shopping flows so runs do not depend on shared demo credentials.
-- Custom `cy.registerAccount` command for creating a fresh logged-in customer before purchase tests.
-- npm scripts: `test`, `test:signUp`, and `test:whatsNew`.
-- Cypress timeouts tuned for Magento checkout (`defaultCommandTimeout`, `pageLoadTimeout`).
-- `.gitignore` entries for `cypress/screenshots`, `cypress/videos`, and `cypress/downloads`.
+### Adicionado
+- Geração de e-mail único nos fluxos de cadastro e compra, para as execuções não dependerem de credenciais compartilhadas do demo.
+- Comando customizado `cy.registerAccount` para criar um cliente autenticado antes dos testes de compra.
+- Scripts npm: `test`, `test:signUp` e `test:whatsNew`.
+- Timeouts do Cypress ajustados para o checkout Magento (`defaultCommandTimeout`, `pageLoadTimeout`).
+- Entradas no `.gitignore` para `cypress/screenshots`, `cypress/videos` e `cypress/downloads`.
 
-### Fixed
-- Register page object password/confirm-password handling and success-message assertion.
-- Product selection for Echo Fit Compression Short (no longer the first item in the Yoga collection).
-- Size/color selection via Magento swatch options instead of brittle option IDs from the old demo.
+### Corrigido
+- Tratamento de senha/confirmação de senha e asserção da mensagem de sucesso no page object de cadastro.
+- Seleção do produto Echo Fit Compression Short (não é mais o primeiro item da coleção Yoga).
+- Seleção de tamanho/cor via swatches do Magento, em vez de IDs frágeis do demo antigo.
 
-### Removed
-- Hardcoded login credentials from fixtures.
-- Checked-in Cypress failure screenshots.
+### Removido
+- Credenciais de login fixas nas fixtures.
+- Screenshots de falha do Cypress versionados no repositório.

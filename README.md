@@ -2,6 +2,23 @@
 
 ![Quality Masters](docs/assets/grupo.png)
 
+## 👥 Equipe Quality Masters
+
+> *Testamos hoje • Garantimos qualidade • Entregamos confiança*  
+> Squad de QA
+
+| # | Nome | Papel / foco no projeto | Contato |
+|---|------|-------------------------|---------|
+| 1 | Moisés Alcântara | Coordenação / documentação / Cenário E2E — cadastro (`#CT-1`) / Cenário E2E — compra (`#CT-2`) | [@moisesAlc](https://github.com/moisesAlc) |
+| 2 | `[Nome]` | | GitHub: `---` |
+| 3 | `[Nome]` | | GitHub: `---` |
+| 4 | `[Nome]` | | GitHub: `---` |
+| 5 | `[Nome]` | | GitHub: `---` |
+| 6 | `[Nome]` | | GitHub: `---` |
+| 7 | `[Nome]` | | GitHub: `---` |
+
+> Esboço inicial — substitua nomes, papéis e links (GitHub/LinkedIn) pelos dados reais da turma.
+
 ## 📖 Visão geral
 
 Suíte de testes automatizados com **Cypress** para um site de e-commerce.  
@@ -94,13 +111,75 @@ Após a execução, artefatos do Cypress (quando gerados) ficam em `cypress/scre
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas!
+Cada integrante da **Quality Masters** trabalha em **um cenário (CT)** por vez, em uma branch própria, e abre um Pull Request para a `main`.
 
-1. Faça um fork deste repositório.
-2. Crie uma nova branch (`git checkout -b feature/sua-feature`).
-3. Faça o commit das alterações (`git commit -m 'Add your feature'`).
-4. Envie a branch (`git push origin feature/sua-feature`).
-5. Abra um pull request.
+### 1. Preparar o ambiente
+
+1. Confira os [pré-requisitos](#-pré-requisitos) (Git, Node, npm).
+2. Clone o repositório (ou atualize o seu clone):
+
+```bash
+git clone https://github.com/moisesAlc/E-Commerce-E2E-Automation.git
+cd E-Commerce-E2E-Automation
+git checkout main
+git pull origin main
+npm install
+```
+
+### 2. Escolher o cenário
+
+1. Veja os cenários existentes em [`docs/fluxos.md`](docs/fluxos.md).
+2. Combine com o grupo qual será o **seu CT** (ex.: login, busca, carrinho…).
+3. Anote um identificador: `#CT-3`, `#CT-4`, etc. (não reutilize `#CT-1` / `#CT-2`).
+
+### 3. Criar a branch do seu cenário
+
+Use um nome claro, em minúsculas, com o número do CT:
+
+```bash
+git checkout -b ct-3-login
+# exemplos: ct-4-busca, ct-5-carrinho, ct-6-checkout-guest
+```
+
+### 4. Implementar o cenário
+
+Na sua branch, em geral você vai:
+
+1. Criar o spec: `cypress/e2e/tests/<nomeDoCenario>.cy.js`
+2. Criar/atualizar page object: `cypress/pages/<nome>Page.js`
+3. Criar fixture, se precisar: `cypress/fixtures/<nome>Data.json`
+4. Adicionar script no `package.json`, se fizer sentido: `"test:<nome>": "npx cypress run --spec ..."`
+5. Documentar o CT em [`docs/fluxos.md`](docs/fluxos.md) e, se quiser, marcar seu nome na tabela da equipe no README.
+
+Siga o padrão dos cenários atuais (`signUpForm` / `whatsNew`): Page Object + fixture + asserts claros.
+
+### 5. Validar localmente
+
+```bash
+npx cypress open
+# ou
+npm run test:<seu-script>
+```
+
+### 6. Commit, push e Pull Request
+
+```bash
+git add .
+git commit -m "Adicionar cenário #CT-3 Login."
+git push -u origin ct-3-login
+```
+
+Abra um **Pull Request** de `ct-3-login` → `main` no GitHub, descrevendo:
+
+- qual CT é;
+- o que o fluxo cobre;
+- como rodar o teste.
+
+### Boas práticas
+
+- Não altere o cenário de outro colega sem combinar.
+- Mantenha a `main` atualizada (`git pull`) antes de abrir o PR.
+- Prefira commits pequenos e mensagens claras (padrão do repositório).
 
 ## 👥 Autores
 

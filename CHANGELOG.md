@@ -4,6 +4,11 @@ Todas as mudanças relevantes deste projeto são documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [Unreleased]
+
+### Adicionado
+- Documentação dos cenários de teste (fluxos E2E) em [`docs/fluxos.md`](docs/fluxos.md); README aponta para esse arquivo.
+
 ## [1.1.0] - 2026-08-07
 
 ### Alterado

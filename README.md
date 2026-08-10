@@ -30,16 +30,16 @@ Instale o Cypress (se ainda não estiver nas dependências):
   npm install cypress --save-dev
 ```
 
-## Cenários de teste
+## Cenários de teste (fluxos E2E)
 
-- Navegação de produtos: busca e filtros.
-- Carrinho: adicionar/remover itens e atualizar quantidades.
-- Checkout: validação do fluxo de compra e integração de pagamento.
-- Conta do usuário: cadastro, login e gerenciamento de perfil.
+| Spec | TC | O que faz |
+|------|----|-----------|
+| `signUpForm.cy.js` | #TC-1 | Cadastro de nova conta |
+| `whatsNew.cy.js` | #TC-2 | Compra logada (catálogo → checkout → pedido) |
+
+Descrição detalhada de cada cenário: [`docs/fluxos.md`](docs/fluxos.md).
 
 ## Executando os testes
-
-Para rodar os testes Cypress, use os comandos abaixo.
 
 Abrir o Cypress Test Runner:
 
@@ -47,33 +47,19 @@ Abrir o Cypress Test Runner:
   npx cypress open
 ```
 
-Isso abre o painel do Cypress, onde você pode executar testes individuais ou a suíte completa.
-
-Rodar os testes em modo headless:
+Rodar em modo headless:
 
 ```bash
   npx cypress run
 ```
 
-Isso executa todos os testes sem a interface do navegador.
-
-Scripts npm disponíveis:
+Scripts npm:
 
 ```bash
   npm test
   npm run test:signUp
   npm run test:whatsNew
 ```
-
-## Cobertura de testes
-
-Os testes cobrem as seguintes áreas:
-
-- Páginas de produto: listagem e detalhes, incluindo filtros, busca e paginação.
-- Gestão do carrinho: adicionar produtos, atualizar quantidades e remover itens.
-- Autenticação: cadastro, login, logout e atualizações de perfil.
-- Fluxo de checkout: endereço, opções de envio, pagamento e conclusão do pedido.
-- Histórico de pedidos: validação do pedido após a compra.
 
 ## Relatórios
 

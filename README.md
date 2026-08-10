@@ -19,6 +19,16 @@
 
 > Esboço inicial — substitua nomes, papéis e links (GitHub/LinkedIn) pelos dados reais da turma.
 
+### ✅ Checklist do grupo (antes de abrir branches)
+
+- [ ] Mapear a lista fechada de cenários (#CT-1 … #CT-?) e o que cada um cobre / não cobre
+- [ ] Validar manualmente cada cenário no Magebit (caminho existe e é estável o bastante)
+- [ ] Combinar donos (quem fica com qual CT — sem sobreposição)
+- [ ] Definir escopo mínimo de cada CT (asserts, fixtures, critério de “pronto”)
+- [ ] Documentar os novos CTs em [`docs/fluxos.md`](docs/fluxos.md)
+- [ ] Atualizar a tabela da equipe com nomes e papéis reais
+- [ ] Só então cada pessoa cria a branch `ct-N-nome` e segue [Contribuindo](#-contribuindo)
+
 ## 📖 Visão geral
 
 Suíte de testes automatizados com **Cypress** para um site de e-commerce.  
@@ -108,6 +118,8 @@ npm run test:whatsNew    # só #CT-2
 ## 📊 Relatórios
 
 Após a execução, artefatos do Cypress (quando gerados) ficam em `cypress/screenshots` e `cypress/videos`.
+
+> ⚠️ **Atenção:** o fluxo de contribuição (um CT por pessoa / uma branch / um PR) só funciona bem se os cenários já estiverem **mapeados e validados** no Magebit. Sem isso, há risco de branches sobrepostas, fluxos frágeis e retrabalho nos PRs. Use o checklist da seção da equipe antes de começar.
 
 ## 🤝 Contribuindo
 

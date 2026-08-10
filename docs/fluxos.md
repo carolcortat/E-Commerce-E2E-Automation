@@ -3,16 +3,16 @@
 Alvo: [magento2-demo.magebit.com](https://magento2-demo.magebit.com/).  
 Suíte Cypress com Page Object Model. Hoje existem **dois** cenários E2E.
 
-| Spec | TC | Script npm | Resumo |
+| Spec | CT | Script npm | Resumo |
 |------|----|------------|--------|
-| `cypress/e2e/tests/signUpForm.cy.js` | #TC-1 | `npm run test:signUp` | Cadastro de conta |
-| `cypress/e2e/tests/whatsNew.cy.js` | #TC-2 | `npm run test:whatsNew` | Compra logada ponta a ponta |
+| `cypress/e2e/tests/signUpForm.cy.js` | #CT-1 | `npm run test:signUp` | Cadastro de conta |
+| `cypress/e2e/tests/whatsNew.cy.js` | #CT-2 | `npm run test:whatsNew` | Compra logada ponta a ponta |
 
 O nome **whatsNew** é legado do menu Magento “What’s New”; o fluxo real é de **compra**.
 
 ---
 
-## 1. `signUpForm` — #TC-1 Cadastro
+## 1. `signUpForm` — #CT-1 Cadastro
 
 **Arquivos:** `signUpForm.cy.js`, `pages/newAccountRegisterPage.js`, `fixtures/registerAccountData.json`
 
@@ -26,12 +26,12 @@ Validar que um visitante consegue **criar uma conta** e ver a mensagem de sucess
 4. Clica em **Create an Account**.
 5. Assert: mensagem visível *“Thank you for registering with Main Website Store.”*
 
-### Fora de escopo deste TC
+### Fora de escopo deste CT
 Não cobre compra, navegação de catálogo nem um caso isolado de login posterior.
 
 ---
 
-## 2. `whatsNew` — #TC-2 Compra (nome legado)
+## 2. `whatsNew` — #CT-2 Compra (nome legado)
 
 **Arquivos:** `whatsNew.cy.js`, `pages/whatsNewPage.js`, `fixtures/whatsNewData.json`  
 **Pré-condição:** cliente autenticado via `cy.registerAccount` no `before` (e-mail `e2e.shop.<timestamp>@example.com`).
@@ -83,7 +83,7 @@ Conta nova → What’s New / Yoga → Echo Fit → carrinho → checkout → pe
 | | `signUpForm` | `whatsNew` |
 |---|---|---|
 | Foco | Cadastro | Compra completa |
-| Autenticação | Conta criada no próprio TC | Conta criada no `before` |
+| Autenticação | Conta criada no próprio CT | Conta criada no `before` |
 | Produto | — | Echo Fit Compression Short |
 | Assert final | Mensagem de registro | Produto no histórico de pedidos |
 

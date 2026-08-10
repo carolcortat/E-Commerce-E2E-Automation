@@ -1,71 +1,98 @@
-# E-Commerce Website - Cypress Automation Test
+# 🛒 E-Commerce Website — Cypress Automation Test
 
-## Visão geral
+![Quality Masters](docs/assets/grupo.png)
 
-Este projeto é uma suíte de testes automatizados para um site de e-commerce usando Cypress. A suíte aponta para o demo público Magento Luma em [magento2-demo.magebit.com](https://magento2-demo.magebit.com/) (substituto do `magento.softwaretestingboard.com`, que foi descontinuado). Os scripts cobrem fluxos como navegação de produtos, adição ao carrinho, compra e ações relacionadas à conta.
+## 📖 Visão geral
 
-## Instalação
+Suíte de testes automatizados com **Cypress** para um site de e-commerce.  
+O alvo atual é o demo público Magento Luma em [magento2-demo.magebit.com](https://magento2-demo.magebit.com/) (substituto do `magento.softwaretestingboard.com`, descontinuado).
 
-Clone o repositório:
+Os scripts cobrem **cadastro de conta** e **compra logada** (catálogo → carrinho → checkout → pedido).
+
+## 🧰 Pré-requisitos
+
+Instale e confira as ferramentas abaixo **antes** do `npm install`:
+
+| Ferramenta | Versão recomendada | Observação |
+|------------|--------------------|------------|
+| 🔧 **Git** | 2.40+ (qualquer 2.x recente) | Necessário para clonar o repositório |
+| 🟢 **Node.js** | **20 LTS** ou **22 LTS** (`>= 18`) | Cypress 13 exige Node.js 18 ou superior |
+| 📦 **npm** | **10.x** (vem com o Node 20/22) | Usado para instalar dependências e rodar scripts |
+
+Versões usadas com sucesso neste projeto:
+
+- Node.js `v22.22.2`
+- npm `10.9.7`
+- Git `2.43.x`
+
+Dependência do projeto (via `package.json`):
+
+- 🧪 **Cypress** `^13.15.0` (instalado com `npm install`)
+
+Como conferir no terminal:
 
 ```bash
-  git clone https://github.com/moisesAlc/E-Commerce-E2E-Automation.git
+git --version
+node -v
+npm -v
 ```
 
-Entre no diretório do projeto:
+## ⚙️ Instalação
+
+1️⃣ Clone o repositório:
 
 ```bash
-  cd E-Commerce-E2E-Automation
+git clone https://github.com/moisesAlc/E-Commerce-E2E-Automation.git
 ```
 
-Instale as dependências:
+2️⃣ Entre no diretório do projeto:
 
 ```bash
-  npm install
+cd E-Commerce-E2E-Automation
 ```
 
-Instale o Cypress (se ainda não estiver nas dependências):
+3️⃣ Instale as dependências (inclui o Cypress):
 
 ```bash
-  npm install cypress --save-dev
+npm install
 ```
 
-## Cenários de teste (fluxos E2E)
+## 🧭 Cenários de teste (fluxos E2E)
 
-| Spec | TC | O que faz |
+| Spec | CT | O que faz |
 |------|----|-----------|
-| `signUpForm.cy.js` | #TC-1 | Cadastro de nova conta |
-| `whatsNew.cy.js` | #TC-2 | Compra logada (catálogo → checkout → pedido) |
+| `signUpForm.cy.js` | #CT-1 | 👤 Cadastro de nova conta |
+| `whatsNew.cy.js` | #CT-2 | 🛍️ Compra logada (catálogo → checkout → pedido) |
 
-Descrição detalhada de cada cenário: [`docs/fluxos.md`](docs/fluxos.md).
+📄 Descrição detalhada de cada cenário: [`docs/fluxos.md`](docs/fluxos.md).
 
-## Executando os testes
+## ▶️ Executando os testes
 
-Abrir o Cypress Test Runner:
-
-```bash
-  npx cypress open
-```
-
-Rodar em modo headless:
+🖥️ Abrir o Cypress Test Runner:
 
 ```bash
-  npx cypress run
+npx cypress open
 ```
 
-Scripts npm:
+🤖 Rodar em modo headless:
 
 ```bash
-  npm test
-  npm run test:signUp
-  npm run test:whatsNew
+npx cypress run
 ```
 
-## Relatórios
+📜 Scripts npm:
 
-Após a execução, artefatos do Cypress (quando gerados) ficam em diretórios como `cypress/screenshots` e `cypress/videos`.
+```bash
+npm test                 # suíte completa
+npm run test:signUp      # só #CT-1
+npm run test:whatsNew    # só #CT-2
+```
 
-## Contribuindo
+## 📊 Relatórios
+
+Após a execução, artefatos do Cypress (quando gerados) ficam em `cypress/screenshots` e `cypress/videos`.
+
+## 🤝 Contribuindo
 
 Contribuições são bem-vindas!
 
@@ -75,7 +102,7 @@ Contribuições são bem-vindas!
 4. Envie a branch (`git push origin feature/sua-feature`).
 5. Abra um pull request.
 
-## Autores
+## 👥 Autores
 
 - [@moisesAlc](https://github.com/moisesAlc)
 - Original: [@Tahamidul Haque](https://github.com/tahmid888)

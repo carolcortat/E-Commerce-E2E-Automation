@@ -8,6 +8,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 
 ### Adicionado
 - Documentação dos cenários de teste (fluxos E2E) em [`docs/fluxos.md`](docs/fluxos.md); README aponta para esse arquivo.
+- Seção de pré-requisitos no README (Git, Node.js, npm) com versões recomendadas.
 
 ## [1.1.0] - 2026-08-07
 
